@@ -32,20 +32,14 @@ def signup(request):
 def index(request):
     return render(request, "index.html")
 
-
 def songs(request):
-    songs = {"songs":[{"id":1,"title":"duis faucibus accumsan odio curabitur convallis","lyrics":"Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis."}]}
-    return render(request, "songs.html", {"songs":songs["songs"]})
+    SONGS_URL = "http://songs-sn-labs-vallejoricar.labs-prod-openshift-san-a45631dc5778dc6371c67d206ba9ae5c-0000.us-east.containers.appdomain.cloud"
+    songs = req.get(f"{SONGS_URL}/song").json()
+    return render(request, "songs.html", {"songs": songs["songs"]})
 
 def photos(request):
-    photos = [{
-    "id": 1,
-    "pic_url": "http://dummyimage.com/136x100.png/5fa2dd/ffffff",
-    "event_country": "United States",
-    "event_state": "District of Columbia",
-    "event_city": "Washington",
-    "event_date": "11/16/2022"
-    }]
+    PHOTO_URL = "https://pictures.1yexw0x5mjzb.us-south.codeengine.appdomain.cloud"
+    photos = req.get(f"{PHOTO_URL}/picture").json()
     return render(request, "photos.html", {"photos": photos})
 
 def login_view(request):
